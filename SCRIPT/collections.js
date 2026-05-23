@@ -4,11 +4,11 @@
 ======================== */
 
 // ---- CONFIG ----
-const WA_NUMBER = '+2340000000000'; // Replace with your WhatsApp number
+const WA_NUMBER = '+2349114561465'; // Replace with your WhatsApp number
 
 const JSONBIN_CONFIG = {
   binId: '6a11d1dd6877513b27be714b',       // Replace after creating your JSONBin
-  apiKey: 'YOUR_X_ACCESS_KEY', // Replace with your VAR2 X-ACCESS-KEY
+  apiKey: '$2a$10$0V1fKXsV0ayUpuHrHO60tORYlH2e9mEtvbNRP.mXb3UKI8nGUowjK', // Replace with your VAR2 X-ACCESS-KEY
   get url() { return `https://api.jsonbin.io/v3/b/${this.binId}`; }
 };
 
