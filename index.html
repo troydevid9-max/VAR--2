@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VAR Accessories — Shop Your Favourites</title>
+
+  <link rel="stylesheet" href="/STYLES/header.css">
+  <link rel="stylesheet" href="/STYLES/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body data-layout="public">
+
+  <!-- DYNAMIC HEADER -->
+  <div id="header"></div>
+
+  <!-- ========================
+       HOME HERO
+  ======================== -->
+  <main>
+    <section class="home-hero">
+
+      <div class="home-hero-text">
+        <p class="home-hero-eyebrow">New Arrivals · 2025</p>
+        <h1>
+          Shop Your<br>
+          <span class="text-highlight">Favourite</span><br>
+          Items.
+        </h1>
+        <p>V.A.R Accessories — modern pieces for students and style-forward individuals. Order directly on WhatsApp.</p>
+        <div class="hero-cta-group">
+          <a href="/PAGES/collections.html" class="btn-primary">
+            <i class="fa-solid fa-bag-shopping"></i> Shop Now
+          </a>
+          <a href="/PAGES/about.html" class="btn-outline">
+            Our Story <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="home-hero-images">
+        <div class="hero-img-grid">
+          <div class="img-main">
+            <img src="/IMAGES/img1.jpeg" alt="Featured Item">
+          </div>
+          <div class="img-sm">
+            <img src="/IMAGES/IMG2.jpeg" alt="Accessory">
+          </div>
+          <div class="img-sm">
+            <img src="/IMAGES/IMG3.jpeg" alt="Accessory">
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="badge-number">50+</div>
+          <div class="badge-text">Items In Stock</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================
+         CATEGORIES
+    ======================== -->
+    <section class="category-section">
+      <h2>Browse by Category</h2>
+      <p>Tap a category to explore</p>
+      <div class="category-container">
+        <a href="/PAGES/collections.html?cat=watches" class="category-card">
+          <i class="fa-regular fa-clock"></i>
+          <h3>Watches</h3>
+        </a>
+        <a href="/PAGES/collections.html?cat=jewellery" class="category-card">
+          <i class="fa-regular fa-gem"></i>
+          <h3>Jewellery</h3>
+        </a>
+        <a href="/PAGES/collections.html?cat=bags" class="category-card">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <h3>Bags</h3>
+        </a>
+        <a href="/PAGES/collections.html?cat=dress" class="category-card">
+          <i class="fa-solid fa-shirt"></i>
+          <h3>Dress</h3>
+        </a>
+        <a href="/PAGES/collections.html?cat=perfume" class="category-card">
+          <i class="fa-solid fa-pump-soap"></i>
+          <h3>Perfumes</h3>
+        </a>
+        <a href="/PAGES/collections.html?cat=cosmetics" class="category-card">
+          <i class="fa-solid fa-star"></i>
+          <h3>Cosmetics</h3>
+        </a>
+      </div>
+    </section>
+
+    <!-- ========================
+         POPULAR ITEMS
+    ======================== -->
+    <section class="popular-section">
+      <div class="section-header">
+        <h2>Popular Items</h2>
+        <p>Most loved by our customers</p>
+      </div>
+      <div class="collections-container" id="popularContainer"></div>
+    </section>
+
+    <!-- ========================
+         ALL COLLECTIONS
+    ======================== -->
+    <section class="collections-section">
+      <div class="collections-top">
+        <h2>Our Collections</h2>
+        <a href="/PAGES/collections.html">View All <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div class="collections-container" id="collectionsContainer"></div>
+    </section>
+
+  </main>
+
+  <!-- DYNAMIC FOOTER -->
+  <div id="footer"></div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/+2340000000000" target="_blank" class="whatsapp-float" title="Order on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <div class="modal-gallery">
+        <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="" id="modalImage">
+      </div>
+      <div class="modal-details">
+        <p class="modal-category" id="modalCategory"></p>
+        <h2 class="modal-name" id="modalName"></h2>
+        <div class="modal-rating">
+          <span class="stars" id="modalStars"></span>
+          <span class="rating-count" id="modalRatingCount"></span>
+        </div>
+        <p class="modal-price" id="modalPrice"></p>
+        <p class="modal-desc" id="modalDesc"></p>
+        <button class="modal-order-btn" id="modalOrderBtn">
+          <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/SCRIPT/transitions.js"></script>
+  <script src="/SCRIPT/include.js"></script>
+  <script src="/SCRIPT/collections.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPopular();
+      renderHome();
+    });
+  </script>
+</body>
+</html>

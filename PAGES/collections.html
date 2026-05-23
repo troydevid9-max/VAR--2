@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections — VAR Accessories</title>
+
+  <link rel="stylesheet" href="/STYLES/header.css">
+  <link rel="stylesheet" href="/STYLES/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body data-layout="public">
+
+  <div id="header"></div>
+
+  <main style="padding-top: 80px;">
+
+    <!-- PAGE HERO -->
+    <section class="collections-page-hero">
+      <h1>Our Collections</h1>
+      <p>Explore all our accessories — filtered, sorted, and found just for you.</p>
+    </section>
+
+    <!-- SEARCH -->
+    <div class="search-section">
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search" placeholder="Search accessories...">
+        <button onclick="doSearch()">Search</button>
+      </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <section class="category-section" style="padding-top:20px; padding-bottom: 24px;">
+      <div class="category-container" id="catButtons">
+        <div class="category-card active" data-cat="all">
+          <i class="fa-solid fa-border-all"></i>
+          <h3>All</h3>
+        </div>
+        <div class="category-card" data-cat="watches">
+          <i class="fa-regular fa-clock"></i>
+          <h3>Watches</h3>
+        </div>
+        <div class="category-card" data-cat="jewellery">
+          <i class="fa-regular fa-gem"></i>
+          <h3>Jewellery</h3>
+        </div>
+        <div class="category-card" data-cat="bags">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <h3>Bags</h3>
+        </div>
+        <div class="category-card" data-cat="dress">
+          <i class="fa-solid fa-shirt"></i>
+          <h3>Dress</h3>
+        </div>
+        <div class="category-card" data-cat="perfume">
+          <i class="fa-solid fa-pump-soap"></i>
+          <h3>Perfume</h3>
+        </div>
+        <div class="category-card" data-cat="cosmetics">
+          <i class="fa-solid fa-star"></i>
+          <h3>Cosmetics</h3>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER & SORT BAR -->
+    <div class="filter-bar">
+      <div class="filter-left">
+        <button class="filter-chip active" data-sort="default">All</button>
+        <button class="filter-chip" data-sort="popular">Popular</button>
+        <button class="filter-chip" data-sort="price-low">Price: Low → High</button>
+        <button class="filter-chip" data-sort="price-high">Price: High → Low</button>
+      </div>
+      <select class="sort-select" id="priceRange">
+        <option value="all">All Prices</option>
+        <option value="0-5000">Under ₦5,000</option>
+        <option value="5000-10000">₦5,000 – ₦10,000</option>
+        <option value="10000-20000">₦10,000 – ₦20,000</option>
+        <option value="20000+">₦20,000+</option>
+      </select>
+    </div>
+
+    <!-- RESULTS COUNT -->
+    <div style="padding: 0 5% 16px; color: var(--text-muted); font-size: 0.85rem;">
+      <span id="resultsCount"></span>
+    </div>
+
+    <!-- PRODUCTS -->
+    <section class="collections-section" style="padding-top: 0;">
+      <div class="collections-container" id="collectionsContainer"></div>
+    </section>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/+2340000000000" target="_blank" class="whatsapp-float" title="Order on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="productModal">
+    <div class="modal-box">
+      <div class="modal-gallery">
+        <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+        <img src="" alt="" id="modalImage">
+      </div>
+      <div class="modal-details">
+        <p class="modal-category" id="modalCategory"></p>
+        <h2 class="modal-name" id="modalName"></h2>
+        <div class="modal-rating">
+          <span class="stars" id="modalStars"></span>
+          <span class="rating-count" id="modalRatingCount"></span>
+        </div>
+        <p class="modal-price" id="modalPrice"></p>
+        <p class="modal-desc" id="modalDesc"></p>
+        <button class="modal-order-btn" id="modalOrderBtn">
+          <i class="fa-brands fa-whatsapp"></i> Order on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/SCRIPT/transitions.js"></script>
+  <script src="/SCRIPT/include.js"></script>
+  <script src="/SCRIPT/collections.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Read URL params for category or search
+      const params = new URLSearchParams(window.location.search);
+      const catParam = params.get('cat');
+      const qParam = params.get('q');
+
+      if (catParam) {
+        setCategory(catParam);
+        document.querySelectorAll('.category-card').forEach(c => {
+          c.classList.toggle('active', c.dataset.cat === catParam);
+        });
+      }
+
+      if (qParam) {
+        document.getElementById('search').value = qParam;
+        setSearch(qParam);
+      }
+
+      renderCollections();
+
+      // Category click
+      document.querySelectorAll('.category-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+          setCategory(card.dataset.cat);
+          renderCollections();
+        });
+      });
+
+      // Sort chips
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          setSort(chip.dataset.sort);
+          renderCollections();
+        });
+      });
+
+      // Price range
+      document.getElementById('priceRange').addEventListener('change', (e) => {
+        setPriceRange(e.target.value);
+        renderCollections();
+      });
+
+      // Search input
+      document.getElementById('search').addEventListener('input', (e) => {
+        setSearch(e.target.value);
+        renderCollections();
+      });
+
+      document.getElementById('search').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') doSearch();
+      });
+    });
+
+    function doSearch() {
+      const val = document.getElementById('search').value;
+      setSearch(val);
+      renderCollections();
+    }
+  </script>
+</body>
+</html>

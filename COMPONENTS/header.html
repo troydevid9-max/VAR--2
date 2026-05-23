@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+<body>
+
+<!-- ========================
+     DESKTOP NAV
+======================== -->
+<nav class="desktop-nav" id="desktopNav">
+
+  <a href="/index.html" class="nav-logo">
+    <span class="logo-big">V.A.R</span>
+    <span class="logo-sub">Accessories</span>
+  </a>
+
+  <div class="nav-links">
+    <a href="/index.html">Home</a>
+    <a href="/PAGES/about.html">About</a>
+    <a href="/PAGES/collections.html">Collections</a>
+    <a href="/PAGES/contact.html">Contact</a>
+  </div>
+
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" title="Toggle dark mode">
+      <i class="fa-solid fa-moon" id="themeIcon"></i>
+    </button>
+    <a href="/PAGES/collections.html" class="nav-shop-btn">
+      <i class="fa-solid fa-bag-shopping"></i>
+      Shop Now
+    </a>
+  </div>
+
+</nav>
+
+
+<!-- ========================
+     MOBILE HEADER (PRESERVED + ENHANCED)
+======================== -->
+<div class="mobile-header">
+
+  <!-- TOP BAR -->
+  <div class="mobile-top">
+
+    <!-- HAMBURGER -->
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- BAG ICON -->
+    <a href="/PAGES/collections.html">
+      <i class="fa-solid fa-bag-shopping mobile-bag"></i>
+    </a>
+
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div class="mobile-nav-links" id="mobileNav">
+    <a href="/index.html">Home</a>
+    <a href="/PAGES/about.html">About</a>
+    <a href="/PAGES/collections.html">Collections</a>
+    <a href="/PAGES/contact.html">Contact</a>
+  </div>
+
+  <!-- BRAND TAG -->
+  <span class="mobile-logo-tag">V.A.R Accessories</span>
+
+  <!-- HERO TEXT -->
+  <div class="mobile-text">
+    <h1>
+      Find your
+      <span>Favourite</span>
+      Items!
+    </h1>
+    <p>Modern accessories for students & fashion lovers.</p>
+  </div>
+
+  <!-- IMAGES STRIP -->
+  <div class="mobile-img-row">
+    <img src="/IMAGES/img1.jpeg" alt="Accessory 1">
+    <img src="/IMAGES/IMG2.jpeg" alt="Accessory 2">
+    <img src="/IMAGES/IMG3.jpeg" alt="Accessory 3">
+  </div>
+
+  <!-- SEARCH -->
+  <div class="mobile-search-wrapper">
+    <div class="mobile-search-box">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="mobile-search" placeholder="Search accessories...">
+    </div>
+    <button class="search-btn" onclick="mobileSearchGo()">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </div>
+
+  <!-- THEME TOGGLE -->
+  <div class="mobile-theme-toggle">
+    <button id="mobileThemeToggle" title="Toggle dark mode">
+      <i class="fa-solid fa-moon" id="mobileThemeIcon"></i>
+    </button>
+  </div>
+
+</div>
+
+<!-- SCRIPTS -->
+<script>
+  // ---- Scroll-aware nav ----
+  const nav = document.getElementById('desktopNav');
+  window.addEventListener('scroll', () => {
+    nav && nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ---- Active link highlight ----
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach(a => {
+    if (a.getAttribute('href') === path || (path.endsWith(a.getAttribute('href'))) ) {
+      a.classList.add('active');
+    }
+  });
+
+  // ---- Dark mode ----
+  function applyTheme(dark) {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    const icon = dark ? 'fa-sun' : 'fa-moon';
+    const iconD = document.getElementById('themeIcon');
+    const iconM = document.getElementById('mobileThemeIcon');
+    if (iconD) { iconD.className = `fa-solid ${icon}`; }
+    if (iconM) { iconM.className = `fa-solid ${icon}`; }
+    localStorage.setItem('var-theme', dark ? 'dark' : 'light');
+  }
+
+  const savedTheme = localStorage.getItem('var-theme');
+  applyTheme(savedTheme === 'dark');
+
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
+  document.getElementById('mobileThemeToggle')?.addEventListener('click', () => {
+    applyTheme(document.documentElement.getAttribute('data-theme') !== 'dark');
+  });
+
+  // ---- Mobile menu ----
+  function initMobileMenu() {
+    const hamburger = document.querySelector('.hamburger');
+    const mobileNav = document.querySelector('.mobile-nav-links');
+    if (!hamburger || !mobileNav) return;
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileNav.classList.toggle('show-mobile-menu');
+    });
+  }
+  initMobileMenu();
+
+  // ---- Mobile search redirect ----
+  function mobileSearchGo() {
+    const val = document.getElementById('mobile-search')?.value.trim();
+    if (val) window.location.href = `/PAGES/collections.html?q=${encodeURIComponent(val)}`;
+  }
+  document.getElementById('mobile-search')?.addEventListener('keypress', e => {
+    if (e.key === 'Enter') mobileSearchGo();
+  });
+</script>
+
+</body>
+</html>
