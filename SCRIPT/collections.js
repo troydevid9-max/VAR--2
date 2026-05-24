@@ -15,10 +15,10 @@ const JSONBIN_CONFIG = {
 // ---- DEFAULT PRODUCTS (fallback if JSONBin not set up yet) ----
 const DEFAULT_PRODUCTS = [
   { id: 1, category: 'perfume', name: 'Gold Perfume', price: 8000, rating: 5, reviews: 42, image: '/IMAGES/black-perfume.jpg', description: 'A bold, luxurious fragrance with warm gold undertones. Long-lasting and unforgettable.', popular: true, views: 0 },
-  { id: 2, category: 'bags', name: 'Ladies Bags', price: 9800, rating: 4, reviews: 28, image: '/IMAGES/ladies-bags.jpg', description: 'Elegant and spacious ladies bag. Perfect for work, school, or outings.', popular: true, views: 0 },
-  { id: 3, category: 'bags', name: 'Classic Tote Bag', price: 7500, rating: 4, reviews: 15, image: '/IMAGES/ladies-bags.jpg', description: 'A versatile, classic tote bag that works with every outfit.', popular: false, views: 0 },
+  { id: 2, category: 'bags', name: 'Ladies Bags', price: 9800, rating: 4, reviews: 28, image: '/IMAGES/expensive bag.jpg', description: 'Elegant and spacious ladies bag. Perfect for work, school, or outings.', popular: true, views: 0 },
+  { id: 3, category: 'bags', name: 'Classic Tote Bag', price: 7500, rating: 4, reviews: 15, image: '/IMAGES/color bags.jpg', description: 'A versatile, classic tote bag that works with every outfit.', popular: false, views: 0 },
   { id: 4, category: 'watches', name: 'Premium Watch', price: 15000, rating: 5, reviews: 56, image: '/IMAGES/img1.jpeg', description: 'A sleek, premium timepiece. Modern design meets reliable quality.', popular: true, views: 0 },
-  { id: 5, category: 'jewellery', name: 'Gold Necklace', price: 5500, rating: 5, reviews: 33, image: '/IMAGES/img2.jpeg', description: 'Delicate gold-tone necklace. Light, elegant, and stunning on any neckline.', popular: true, views: 0 },
+  { id: 5, category: 'jewellery', name: 'Fancy Cups', price: 3500, rating: 5, reviews: 33, image: '/IMAGES/cups.jpg', description: 'Delicate gold-tone necklace. Light, elegant, and stunning on any neckline.', popular: true, views: 0 },
   { id: 6, category: 'jewellery', name: 'Pearl Earrings', price: 4200, rating: 4, reviews: 18, image: '/IMAGES/img3.jpeg', description: 'Classic pearl earrings that elevate any look — casual or formal.', popular: false, views: 0 },
   { id: 7, category: 'perfume', name: 'Rose Mist Perfume', price: 6500, rating: 4, reviews: 22, image: '/IMAGES/black-perfume.jpg', description: 'A fresh, floral rose mist with light citrus notes. Perfect for everyday wear.', popular: false, views: 0 },
   { id: 8, category: 'cosmetics', name: 'Lip Gloss Set', price: 3500, rating: 5, reviews: 47, image: '/IMAGES/img2.jpeg', description: 'A set of 4 gorgeous lip glosses in trending shades. Hydrating and long-lasting.', popular: true, views: 0 },
