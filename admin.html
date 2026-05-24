@@ -828,7 +828,7 @@ async function init() {
    JSONBIN LOAD / SAVE
 ======================== */
 async function loadProducts() {
-  if (JSONBIN_CONFIG.binId === 'YOUR_BIN_ID' || JSONBIN_CONFIG.apiKey === 'YOUR_X_ACCESS_KEY') {
+  if (JSONBIN_CONFIG.binId === '6a12b6fbee5a733b120f0c63' || JSONBIN_CONFIG.apiKey === '$2a$10$Vq79uAChLUzM6DLlH8tNK.NJFYi0JGL5L9MmyXx3mv0IOdP1./aXC') {
     products = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
     showToast('⚠️ Paste your X-ACCESS-KEY in admin.html & collections.js', 'error');
     return;
@@ -846,7 +846,7 @@ async function loadProducts() {
 }
 
 async function saveToJSONBin() {
-  if (JSONBIN_CONFIG.binId === 'YOUR_BIN_ID' || JSONBIN_CONFIG.apiKey === 'YOUR_X_ACCESS_KEY') {
+  if (JSONBIN_CONFIG.binId === '6a12b6fbee5a733b120f0c63' || JSONBIN_CONFIG.apiKey === '$2a$10$Vq79uAChLUzM6DLlH8tNK.NJFYi0JGL5L9MmyXx3mv0IOdP1./aXC') {
     showToast('⚠️ Paste your X-ACCESS-KEY to enable saving', 'error');
     return false;
   }
