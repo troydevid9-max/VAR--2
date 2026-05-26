@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Collections — VAR Accessories</title>
-
   <link rel="stylesheet" href="/STYLES/header.css">
   <link rel="stylesheet" href="/STYLES/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
@@ -31,40 +30,40 @@
     </div>
 
     <!-- CATEGORIES -->
-    <section class="category-section" style="padding-top:20px; padding-bottom: 24px;">
+    <section class="category-section" style="padding-top:20px; padding-bottom:24px;">
       <div class="category-container" id="catButtons">
+
         <div class="category-card active" data-cat="all">
-          <i class="fa-solid fa-border-all"></i>
-          <h3>All</h3>
+          <i class="fa-solid fa-border-all"></i><h3>All</h3>
         </div>
         <div class="category-card" data-cat="watches">
-          <i class="fa-regular fa-clock"></i>
-          <h3>Watches</h3>
+          <i class="fa-regular fa-clock"></i><h3>Watches</h3>
         </div>
         <div class="category-card" data-cat="jewellery">
-          <i class="fa-regular fa-gem"></i>
-          <h3>Jewellery</h3>
+          <i class="fa-regular fa-gem"></i><h3>Jewellery</h3>
         </div>
         <div class="category-card" data-cat="bags">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <h3>Bags</h3>
+          <i class="fa-solid fa-bag-shopping"></i><h3>Bags</h3>
         </div>
         <div class="category-card" data-cat="dress">
-          <i class="fa-solid fa-shirt"></i>
-          <h3>Dress</h3>
+          <i class="fa-solid fa-shirt"></i><h3>Dress</h3>
         </div>
         <div class="category-card" data-cat="perfume">
-          <i class="fa-solid fa-pump-soap"></i>
-          <h3>Perfume</h3>
+          <i class="fa-solid fa-pump-soap"></i><h3>Perfume</h3>
         </div>
         <div class="category-card" data-cat="cosmetics">
-          <i class="fa-solid fa-star"></i>
-          <h3>Cosmetics</h3>
+          <i class="fa-solid fa-star"></i><h3>Cosmetics</h3>
         </div>
         <div class="category-card" data-cat="accessories">
-           <i class="fa-solid fa-puzzle-piece"></i>
-          <h3>Accessories</h3>
+          <i class="fa-solid fa-puzzle-piece"></i><h3>Accessories</h3>
         </div>
+        <div class="category-card" data-cat="stationery">
+          <i class="fa-solid fa-pen-nib"></i><h3>Stationery</h3>
+        </div>
+        <div class="category-card" data-cat="gadgets">
+          <i class="fa-solid fa-fan"></i><h3>Mini Fans</h3>
+        </div>
+
       </div>
     </section>
 
@@ -78,20 +77,21 @@
       </div>
       <select class="sort-select" id="priceRange">
         <option value="all">All Prices</option>
-        <option value="0-5000">Under ₦5,000</option>
+        <option value="1000-5000">₦1,000 – ₦5,000</option>
         <option value="5000-10000">₦5,000 – ₦10,000</option>
-        <option value="10000-20000">₦10,000 – ₦20,000</option>
-        <option value="20000+">₦20,000+</option>
+        <option value="10000-30000">₦10,000 – ₦30,000</option>
+        <option value="30000-70000">₦30,000 – ₦70,000</option>
+        <option value="70000+">Above ₦70,000</option>
       </select>
     </div>
 
     <!-- RESULTS COUNT -->
-    <div style="padding: 0 5% 16px; color: var(--text-muted); font-size: 0.85rem;">
+    <div style="padding:0 5% 16px; color:var(--text-muted); font-size:0.85rem;">
       <span id="resultsCount"></span>
     </div>
 
     <!-- PRODUCTS -->
-    <section class="collections-section" style="padding-top: 0;">
+    <section class="collections-section" style="padding-top:0;">
       <div class="collections-container" id="collectionsContainer"></div>
     </section>
 
@@ -99,8 +99,7 @@
 
   <div id="footer"></div>
 
-  <!-- WHATSAPP FLOAT -->
-  <a href="https://wa.me/+2340000000000" target="_blank" class="whatsapp-float" title="Order on WhatsApp">
+  <a href="https://wa.me/+2348066477021" target="_blank" class="whatsapp-float" title="Order on WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
@@ -131,32 +130,40 @@
 
   <script src="/SCRIPT/transitions.js"></script>
   <script src="/SCRIPT/include.js"></script>
-  <script src="/SCRIPT/collections.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // Read URL params for category or search
-      const params = new URLSearchParams(window.location.search);
+
+  <script type="module">
+    import {
+      renderCollections, setCategory, setSort, setSearch, setPriceRange,
+      openModal, closeModal
+    } from '/SCRIPT/collections.js';
+
+    // Make needed functions global so onclick attributes work
+    window.openModal  = openModal;
+    window.closeModal = closeModal;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+
+      // URL params
+      const params   = new URLSearchParams(window.location.search);
       const catParam = params.get('cat');
-      const qParam = params.get('q');
+      const qParam   = params.get('q');
 
       if (catParam) {
         setCategory(catParam);
-        document.querySelectorAll('.category-card').forEach(c => {
-          c.classList.toggle('active', c.dataset.cat === catParam);
-        });
+        document.querySelectorAll('.category-card').forEach(c =>
+          c.classList.toggle('active', c.dataset.cat === catParam));
       }
-
       if (qParam) {
         document.getElementById('search').value = qParam;
         setSearch(qParam);
       }
 
-      renderCollections();
+      await renderCollections();
 
-      // Category click
+      // Category clicks
       document.querySelectorAll('.category-card').forEach(card => {
         card.addEventListener('click', () => {
-          document.querySelectorAll('.category-card').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.category-card').forEach(c=>c.classList.remove('active'));
           card.classList.add('active');
           setCategory(card.dataset.cat);
           renderCollections();
@@ -166,35 +173,35 @@
       // Sort chips
       document.querySelectorAll('.filter-chip').forEach(chip => {
         chip.addEventListener('click', () => {
-          document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+          document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
           chip.classList.add('active');
           setSort(chip.dataset.sort);
           renderCollections();
         });
       });
 
-      // Price range
-      document.getElementById('priceRange').addEventListener('change', (e) => {
+      // Price filter
+      document.getElementById('priceRange').addEventListener('change', e => {
         setPriceRange(e.target.value);
         renderCollections();
       });
 
-      // Search input
-      document.getElementById('search').addEventListener('input', (e) => {
+      // Search
+      document.getElementById('search').addEventListener('input', e => {
         setSearch(e.target.value);
         renderCollections();
       });
-
-      document.getElementById('search').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') doSearch();
+      document.getElementById('search').addEventListener('keypress', e => {
+        if (e.key==='Enter') doSearch();
       });
     });
 
-    function doSearch() {
+    window.doSearch = function() {
       const val = document.getElementById('search').value;
       setSearch(val);
       renderCollections();
-    }
+    };
   </script>
+
 </body>
 </html>

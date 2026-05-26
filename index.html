@@ -157,11 +157,18 @@
 
   <script src="/SCRIPT/transitions.js"></script>
   <script src="/SCRIPT/include.js"></script>
-  <script src="/SCRIPT/collections.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      renderPopular();
-      renderHome();
+
+  <script type="module">
+    import { renderPopular, renderHome, openModal, closeModal, orderOnWhatsApp } from '/SCRIPT/collections.js';
+
+    // Expose to global scope for onclick attributes
+    window.openModal       = openModal;
+    window.closeModal      = closeModal;
+    window.orderOnWhatsApp = orderOnWhatsApp;
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await renderPopular();
+      await renderHome();
     });
   </script>
 </body>
