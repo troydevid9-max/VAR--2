@@ -4,7 +4,7 @@
 ======================== */
 
 // ---- CONFIG ----
-const WA_NUMBER = '+2349114561465'; // Replace with your WhatsApp number
+const WA_NUMBER = '+2348066477021'; // Replace with your WhatsApp number
 
 const JSONBIN_CONFIG = {
   binId: '6a12b6fbee5a733b120f0c63',       // Replace after creating your JSONBin
